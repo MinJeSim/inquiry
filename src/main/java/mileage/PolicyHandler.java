@@ -23,14 +23,11 @@ public class PolicyHandler {
 
     @StreamListener(KafkaProcessor.INPUT)
     public void wheneverInquirySent_SendInquiry(@Payload InquirySent inquirySent) {
-
         if (inquirySent.isMe()) {
             System.out.println("##### listener SendInquiry : " + inquirySent.toJson());
             Optional<Inquiry> inquiryOptional = inquiryRepository.findByMemberId(inquirySent.getMemberId());
 
-            Inquiry inquiry;
-
-            inquiry = inquiryOptional.orElseGet(Inquiry::new);
+            Inquiry inquiry = inquiryOptional.orElseGet(Inquiry::new);
 
             inquiry.setInquiryStatus("RECEIPTED");
             inquiry.setMemberId(inquirySent.getMemberId());

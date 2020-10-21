@@ -28,6 +28,7 @@ public class Inquiry {
             ReceiptInquiry receiptInquiry = new ReceiptInquiry();
             BeanUtils.copyProperties(this, receiptInquiry);
             receiptInquiry.setInquiryStatus("RECEIPT");
+            receiptInquiry.setInquiryContents("TEST DONE");
 
             receiptInquiry.publishAfterCommit();
         }
