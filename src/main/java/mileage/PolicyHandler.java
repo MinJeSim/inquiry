@@ -30,11 +30,7 @@ public class PolicyHandler {
 
             Inquiry inquiry;
 
-            if (inquiryOptional.isEmpty()) {
-                inquiry = new Inquiry();
-            } else {
-                inquiry = inquiryOptional.get();
-            }
+            inquiry = inquiryOptional.orElseGet(Inquiry::new);
 
             inquiry.setInquiryStatus("RECEIPTED");
             inquiry.setMemberId(inquirySent.getMemberId());
