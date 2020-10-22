@@ -13,9 +13,14 @@ class InquiryHst {
     private Long memberId;
     private String inquiryStatus;
     private String inquiryContents;
+
     @PrePersist
     public void onPrePersist(){
         System.out.println("onPre InquiryHst");
+
+//        CancelInquiry cancelInquiry = new CancelInquiry();
+//        BeanUtils.copyProperties(this, cancelInquiry);
+//        cancelInquiry.publishAfterCommit();
         /*
         try {
             System.out.println("Thread Sleep");
@@ -29,9 +34,7 @@ class InquiryHst {
     public void onPostPersist(){
         System.out.println("onPost InquiryHst");
 
-        CancelInquiry cancelInquiry = new CancelInquiry();
-        BeanUtils.copyProperties(this, cancelInquiry);
-        cancelInquiry.publishAfterCommit();
+
     }
 
     public Long getId() {

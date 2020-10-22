@@ -17,14 +17,7 @@ public class Inquiry {
 
     @PostPersist
     public void onPostPersist() {
-        if(this.inquiryContents == null) {
-            CancelInquiry cancelInquiry = new CancelInquiry();
-            cancelInquiry.setInquiryStatus("CANCEL");
-
-            BeanUtils.copyProperties(this, cancelInquiry);
-
-            cancelInquiry.publishAfterCommit();
-        } else {
+        if(this.inquiryStatus.equals("INQUIRING")) {
             ReceiptInquiry receiptInquiry = new ReceiptInquiry();
             BeanUtils.copyProperties(this, receiptInquiry);
             receiptInquiry.setInquiryStatus("RECEIPT");
