@@ -21,13 +21,13 @@ class InquiryHst {
 //        CancelInquiry cancelInquiry = new CancelInquiry();
 //        BeanUtils.copyProperties(this, cancelInquiry);
 //        cancelInquiry.publishAfterCommit();
-        /*
+
         try {
             System.out.println("Thread Sleep");
-            Thread.currentThread().sleep((long) (450 + Math.random() * 230));
+            Thread.currentThread().sleep((long) (400 + Math.random() * 230));
         } catch (InterruptedException e) {
             e.printStackTrace();
-        }*/
+        }
     }
 
     @PostPersist
