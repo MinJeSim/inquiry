@@ -17,10 +17,17 @@ public class Inquiry {
 
     @PostPersist
     public void onPostPersist() {
-        if(this.inquiryStatus.equals("INQUIRING")) {
+        if(!this.inquiryStatus.equals("RECEIPTED")) {
             ReceiptInquiry receiptInquiry = new ReceiptInquiry();
             BeanUtils.copyProperties(this, receiptInquiry);
-            receiptInquiry.setInquiryStatus("RECEIPT");
+            receiptInquiry.setInquiryStatus("RECEIPTED");
+            receiptInquiry.setInquiryContents("TEST DONE");
+
+            receiptInquiry.publishAfterCommit();
+        } else {
+            ReceiptInquiry receiptInquiry = new ReceiptInquiry();
+            BeanUtils.copyProperties(this, receiptInquiry);
+            receiptInquiry.setInquiryStatus("ALREADY RECEIPT");
             receiptInquiry.setInquiryContents("TEST DONE");
 
             receiptInquiry.publishAfterCommit();

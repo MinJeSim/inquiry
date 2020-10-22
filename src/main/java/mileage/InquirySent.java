@@ -4,6 +4,7 @@ public class InquirySent extends AbstractEvent {
 
     private Long id;
     private Long memberId;
+    private String inquiryStatus;
     private String inquiryContents;
 
     public Long getId() {
@@ -26,6 +27,14 @@ public class InquirySent extends AbstractEvent {
 
     public void setInquiryContents(String inquiryContents) {
         this.inquiryContents = inquiryContents;
+    }
+
+    public String getInquiryStatus() {
+        return inquiryStatus;
+    }
+
+    public void setInquiryStatus(String inquiryStatus) {
+        this.inquiryStatus = inquiryStatus;
     }
 
 }

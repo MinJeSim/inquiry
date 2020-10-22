@@ -25,15 +25,27 @@ public class PolicyHandler {
     public void wheneverInquirySent_SendInquiry(@Payload InquirySent inquirySent) {
         if (inquirySent.isMe()) {
             System.out.println("##### listener SendInquiry : " + inquirySent.toJson());
-            Optional<Inquiry> inquiryOptional = inquiryRepository.findByMemberId(inquirySent.getMemberId());
+            if (!inquirySent.getInquiryStatus().equals("RECEIPTED")) {
+                Optional<Inquiry> inquiryOptional = inquiryRepository.findByMemberId(inquirySent.getMemberId());
 
-            Inquiry inquiry = inquiryOptional.orElseGet(Inquiry::new);
+                Inquiry inquiry = inquiryOptional.orElseGet(Inquiry::new);
 
-            inquiry.setInquiryStatus("RECEIPTED");
-            inquiry.setMemberId(inquirySent.getMemberId());
-            inquiry.setInquiryContents(inquirySent.getInquiryContents());
+                inquiry.setInquiryStatus("RECEIPTED");
+                inquiry.setMemberId(inquirySent.getMemberId());
+                inquiry.setInquiryContents(inquirySent.getInquiryContents());
 
-            inquiryRepository.save(inquiry);
+                inquiryRepository.save(inquiry);
+            } else {
+                Optional<Inquiry> inquiryOptional = inquiryRepository.findByMemberId(inquirySent.getMemberId());
+
+                Inquiry inquiry = inquiryOptional.orElseGet(Inquiry::new);
+
+                inquiry.setInquiryStatus("ALREADY RECEIPTED");
+                inquiry.setMemberId(inquirySent.getMemberId());
+                inquiry.setInquiryContents(inquirySent.getInquiryContents());
+
+                inquiryRepository.save(inquiry);
+            }
         }
     }
 }
