@@ -18,9 +18,9 @@ class InquiryHst {
     public void onPrePersist(){
         System.out.println("onPre InquiryHst");
 
-//        CancelInquiry cancelInquiry = new CancelInquiry();
-//        BeanUtils.copyProperties(this, cancelInquiry);
-//        cancelInquiry.publishAfterCommit();
+        CancelInquiry cancelInquiry = new CancelInquiry();
+        BeanUtils.copyProperties(this, cancelInquiry);
+        cancelInquiry.publishAfterCommit();
 
         try {
             System.out.println("Thread Sleep");
